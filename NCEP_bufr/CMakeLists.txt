@@ -27,7 +27,7 @@ set (srcs
    chrtrn.f
    chrtrna.f
    cktaba.f
-   closbf.f
+   closbf.F
    closmg.f
    cmpia.c
    cmpmsg.f
@@ -63,7 +63,7 @@ set (srcs
    dxmini.f
    elemdx.f
    errwrt.f
-   exitbufr.F
+   exitbufr.f
    fstag.f
    getabdb.f
    getbmiss.f
@@ -375,12 +375,9 @@ if (INTEGER_KIND STREQUAL "i8")
 endif()
 
 
-target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:C>:STATIC_ALLOCATION>)
+target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:C>:DYNAMIC_ALLOCATION>)
 target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:C>:MAXNC=600>)
 target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:C>:MXNAF=3>)
 target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:C>:UNDERSCORE>)
-
-if (CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
-   target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:DYNAMIC_ALLOCATION>)
-endif ()
+target_compile_definitions (${this} PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:DYNAMIC_ALLOCATION>)
 
